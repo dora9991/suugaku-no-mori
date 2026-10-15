@@ -52,6 +52,7 @@ npm install
 npm run dev      # http://localhost:5185/
 npm test         # ルールと問題のテスト（全テンプレートで「正解を入れると正解になる」も確かめる）
 npm run build    # 公開用（dist/）
+npm run preview  # 公開と同じ形で確認 → http://localhost:5185/suugaku-no-mori/
 npm run sync     # 数学ラボ ソロから問題を取りこみなおす
 ```
 
