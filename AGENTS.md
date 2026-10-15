@@ -5,7 +5,7 @@
 
 ## デザインの作業
 
-- [docs/DESIGN_BRIEF.md](docs/DESIGN_BRIEF.md) に従う。変えるのは見た目だけ。
+- [docs/DESIGN_BRIEF.md](docs/DESIGN_BRIEF.md) に従う。いちばんの目的は「ゲームらしさ」（子どもが やりたくなる見た目と手ざわり）。変えるのは見た目と演出（絵・アニメーション・音）。
 - 絵は `src/ui/Art.jsx` の name で呼んでいる。name は変えずに中身（絵）を差しかえる。
 - 終わったら `docs/DESIGN_CHANGELOG.md` に変更の要約を書く。
 
