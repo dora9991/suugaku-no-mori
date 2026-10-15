@@ -1,4 +1,4 @@
-// 問題テンプレート（数学ラボ ソロの小学校）が、かずの森の出題・答え合わせで使えるかを全部たしかめる。
+// 問題テンプレート（数学ラボ ソロの小学校）が、すうがくの森の出題・答え合わせで使えるかを全部たしかめる。
 //   node --test test/
 import { test } from "node:test";
 import assert from "node:assert/strict";

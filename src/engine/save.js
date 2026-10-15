@@ -7,9 +7,9 @@
 import { VILLAGERS } from "../data/villagers.js";
 import { AREAS } from "../content/index.js";
 
-export const SAVE_KEY = "kazu-no-mori:v1";
+export const SAVE_KEY = "suugaku-no-mori:v1";
 /** デモ（?demo）用。ほんもののセーブを上書きしない */
-export const DEMO_KEY = "kazu-no-mori:demo";
+export const DEMO_KEY = "suugaku-no-mori:demo";
 export const SAVE_VERSION = 1;
 
 /** 端末の日付で "YYYY-MM-DD" */
@@ -85,7 +85,7 @@ export function rollDay(s, today = todayStr()) {
 const memory = new Map();
 export function safeStorage() {
   try {
-    const k = "__kazu_test__";
+    const k = "__mori_test__";
     window.localStorage.setItem(k, "1");
     window.localStorage.removeItem(k);
     return window.localStorage;

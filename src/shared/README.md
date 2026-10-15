@@ -4,4 +4,4 @@
 
 - 問題を直す・足すときは、共有元（math-dialogue/src/solo/content/elem/）を直してから `npm run sync`。
 - どのコミットから同期したかは `SOURCE.json`。
-- かずの森の側で、出題のしかた（住人・分野・レベル）を決めているのは `src/content/index.js`。
+- すうがくの森の側で、出題のしかた（住人・分野・レベル）を決めているのは `src/content/index.js`。

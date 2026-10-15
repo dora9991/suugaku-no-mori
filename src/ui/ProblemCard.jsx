@@ -61,7 +61,7 @@ export default function ProblemCard({
 
   // 開発中だけ：ブラウザでの通し確認（Playwright）が いまの問題を読めるように
   useEffect(() => {
-    if (import.meta.env.DEV) window.__kazuProblem = problem;
+    if (import.meta.env.DEV) window.__moriProblem = problem;
   }, [problem]);
 
   // つりの時間

@@ -1,9 +1,9 @@
 {
-  "name": "kazu-no-mori",
+  "name": "suugaku-no-mori",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "かずの森（仮）— 算数をとくと森のくらしが育つ、小学生向けのゲーム。問題は数学ラボ ソロの小学校テンプレートを使う。",
+  "description": "すうがくの森— 算数をとくと森のくらしが育つ、小学生向けのゲーム。問題は数学ラボ ソロの小学校テンプレートを使う。",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -1,6 +1,6 @@
 // ============================================================
 // sync-content.mjs — 数学ラボ ソロ（math-dialogue/src/solo）の「小学校の問題テンプレート」を、
-//   かずの森の src/shared/ に同期する。
+//   すうがくの森の src/shared/ に同期する。
 //
 //  ・単一の真実は math-dialogue/src/solo（共有元）。src/shared/ は直接編集しない。
 //    問題を直したいときは共有元を直して、ここで npm run sync する。
@@ -39,7 +39,7 @@ const FILES = [
 if (!existsSync(SRC)) {
   console.error(
     `共有元が見つかりません: ${SRC}\n` +
-      "（kazu-no-mori と math-dialogue を同じ親フォルダに置くか、--from で src/solo の場所を指定してください。\n" +
+      "（suugaku-no-mori と math-dialogue を同じ親フォルダに置くか、--from で src/solo の場所を指定してください。\n" +
       "  数学ラボ ソロは、いまは math-dialogue のブランチ claude/keen-tesla-em1r7j にあります）"
   );
   process.exit(1);
@@ -110,7 +110,7 @@ writeFileSync(
 
 - 問題を直す・足すときは、共有元（math-dialogue/src/solo/content/elem/）を直してから \`npm run sync\`。
 - どのコミットから同期したかは \`SOURCE.json\`。
-- かずの森の側で、出題のしかた（住人・分野・レベル）を決めているのは \`src/content/index.js\`。
+- すうがくの森の側で、出題のしかた（住人・分野・レベル）を決めているのは \`src/content/index.js\`。
 `
 );
 

@@ -1,4 +1,4 @@
-# かずの森（仮）
+# すうがくの森
 
 算数の問題をとくと、森の なかまの「おねがい」がかなって、どうぐが育ち、家具がつくれて、キャンプが にぎやかになる。小学生（小1〜小6）向けのゲーム。
 
@@ -41,7 +41,7 @@
 - **数学ラボ ソロ**（math-dialogue の `src/solo`）の小学校の問題テンプレートを、そのまま使っている。小1〜小6・55単元・951テンプレート。毎回数字が変わり、ヒント・とき方・4択の誤答（よくある間違い）・前提の単元がついている。
 - `npm run sync` で `src/shared/` にコピーする。**`src/shared/` は直接編集しない**（問題を直すときは数学ラボ ソロの側を直してから sync）。
 - 数学ラボ ソロは、いまは math-dialogue のブランチ **`claude/keen-tesla-em1r7j`** にある（main にはまだ入っていない）。どのコミットから同期したかは `src/shared/SOURCE.json`。
-- 同期スクリプトは、`kazu-no-mori` と `math-dialogue` が同じ親フォルダにある前提。ちがう場所なら `npm run sync -- --from <math-dialogue/src/solo の場所>`。
+- 同期スクリプトは、`suugaku-no-mori` と `math-dialogue` が同じ親フォルダにある前提。ちがう場所なら `npm run sync -- --from <math-dialogue/src/solo の場所>`。
 
 ## 動かし方
 
@@ -56,7 +56,7 @@ npm run sync     # 数学ラボ ソロから問題を取りこみなおす
 ```
 
 - デザイン確認用：`http://localhost:5185/?demo`（素材・家具・なかよし・たからのちずが そろった状態。`?demo=E1` で1年生）。デモは ほんもののセーブとは別に保存される。
-- 記録は端末のブラウザ（localStorage の `kazu-no-mori:v1`）だけ。広告・課金・外部への送信はない。
+- 記録は端末のブラウザ（localStorage の `suugaku-no-mori:v1`）だけ。広告・課金・外部への送信はない。
 
 ## フォルダ構成
 
@@ -82,7 +82,7 @@ docs/                  … 設計メモ・デザイン依頼書
 ## 公開（GitHub Pages）
 
 main に入ると、GitHub Actions がテスト → ビルド → 公開する（`.github/workflows/deploy.yml`）。
-**初回だけ**、リポジトリの Settings → Pages → Source を「GitHub Actions」にする。公開URLは `https://dora9991.github.io/kazu-no-mori/`。
+**初回だけ**、リポジトリの Settings → Pages → Source を「GitHub Actions」にする。公開URLは `https://dora9991.github.io/suugaku-no-mori/`。
 
 ## デザイン（Codex）
 

@@ -15,7 +15,7 @@ export default function Start({ onStart }) {
             <Art key={v.id} name={v.art} size="lg" />
           ))}
         </div>
-        <h1 className="title">かずの もり</h1>
+        <h1 className="title">すうがくの もり</h1>
         <p className="lead">もんだいを といて、もりの なかまの おねがいを きこう。</p>
       </div>
 
