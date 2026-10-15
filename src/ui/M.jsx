@@ -11,7 +11,10 @@ function texHtml(src) {
   if (cache.has(src)) return cache.get(src);
   let html;
   try {
-    html = katex.renderToString(src, { throwOnError: false, strict: "ignore" });
+    html = katex.renderToString("\\displaystyle " + src, {
+      throwOnError: false,
+      strict: "ignore",
+    });
   } catch {
     html = src;
   }
@@ -26,7 +29,15 @@ export default function M({ children, className }) {
   return (
     <span className={className}>
       {parts.map((p, i) =>
-        i % 2 === 1 ? <span key={i} className="tex" dangerouslySetInnerHTML={{ __html: texHtml(p) }} /> : p ? <span key={i}>{p}</span> : null
+        i % 2 === 1 ? (
+          <span
+            key={i}
+            className="tex"
+            dangerouslySetInnerHTML={{ __html: texHtml(p) }}
+          />
+        ) : p ? (
+          <span key={i}>{p}</span>
+        ) : null,
       )}
     </span>
   );

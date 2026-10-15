@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- 仮のアイコン（木）。デザインで差しかえる -->
-  <rect x="28" y="40" width="8" height="18" rx="2" fill="#8a5a2b"/>
-  <circle cx="32" cy="26" r="20" fill="#3f8f4e"/>
-  <circle cx="24" cy="22" r="4" fill="#f2b33d"/>
-  <circle cx="40" cy="30" r="4" fill="#f2b33d"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none"><g stroke="#354f42" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(58 101) scale(2)"><path d="M0 0Q-18-27 7-35Q24-14 0 0" fill="#8ba66a" /><path d="M0 0 6-25"/></g><g transform="translate(52 105) scale(1.8)"><path d="M0 0Q-18-27 7-35Q24-14 0 0" fill="#608c69" /><path d="M0 0 6-25"/></g><path d="M57 106V50" stroke="#976f46" stroke-width="8"/></g></svg>

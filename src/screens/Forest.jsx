@@ -25,68 +25,114 @@ export default function Forest({ s, go }) {
   const pct = Math.min(100, Math.round((solved / goal) * 100));
   return (
     <main className="screen forest">
-      <section className="forest-sky">
-        <p className="greet">{greeting(s.name)}</p>
-        <div className="goal">
-          <span className="goal-label">きょうの もくひょう</span>
-          <span className="bar bar-goal">
-            <span className="bar-fill" style={{ width: `${pct}%` }} />
-          </span>
-          <span className="goal-num">
-            {solved}/{goal}
-          </span>
+      <div className="forest-scene">
+        <div className="forest-welcome">
+          <p className="greet">{greeting(s.name)}</p>
+          <h1>もりで、なにしよう？</h1>
+          <p>なかまに はなしかけて みよう！</p>
         </div>
-      </section>
-
-      <section className="villagers" aria-label="もりの なかま">
-        {VILLAGERS.map((v) => {
-          const here = isHere(s, v);
-          const left = here ? requestsLeft(s, v.id) : 0;
-          const special = here && isSpecialNext(s, v.id);
-          return (
-            <button key={v.id} type="button" className={`villager ${here ? "" : "is-away"}`} disabled={!here} onClick={() => go("request", { villagerId: v.id })}>
-              {here && left > 0 && <span className={`badge ${special ? "badge-special" : ""}`}>{special ? "⭐" : "！"}</span>}
-              <Art name={here ? v.art : "away"} size="xl" title={here ? undefined : `${v.name}は おでかけ中`} />
-              <span className="villager-name">{v.name}</span>
-              <span className="villager-area">{AREA_LABEL[v.area]}</span>
-              {here ? (
-                <>
+        <div className="forest-quest">
+          <Art name="star" size="md" title="" />
+          <div>
+            <span className="goal-label">きょうの もくひょう</span>
+            <span
+              className="bar bar-goal"
+              role="progressbar"
+              aria-label="きょうの もくひょう"
+              aria-valuenow={solved}
+              aria-valuemin={0}
+              aria-valuemax={Math.max(solved, goal)}
+            >
+              <span className="bar-fill" style={{ width: `${pct}%` }} />
+            </span>
+          </div>
+          <strong className="goal-num">
+            {solved}
+            <small> / {goal}</small>
+          </strong>
+        </div>
+        <div className="forest-drift" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
+        <section className="villagers" aria-label="もりの なかま">
+          {VILLAGERS.map((v) => {
+            const here = isHere(s, v);
+            const left = here ? requestsLeft(s, v.id) : 0;
+            const special = here && isSpecialNext(s, v.id);
+            return (
+              <button
+                key={v.id}
+                type="button"
+                className={`villager villager-${v.id} ${here ? "" : "is-away"}`}
+                disabled={!here}
+                onClick={() => go("request", { villagerId: v.id })}
+              >
+                {here && left > 0 && (
+                  <span className={`badge ${special ? "badge-special" : ""}`}>
+                    {special ? (
+                      <Art name="star" size="sm" title="とくべつ" />
+                    ) : (
+                      "！"
+                    )}
+                  </span>
+                )}
+                <Art
+                  name={here ? v.art : "away"}
+                  size="xl"
+                  title={here ? undefined : `${v.name}は おでかけ中`}
+                />
+                <span className="villager-sign">
+                  <span className="villager-name">{v.name}</span>
                   <Hearts points={s.friend?.[v.id] || 0} />
-                  <span className="villager-status">{left > 0 ? `おねがい あと ${left}` : "また あした"}</span>
-                </>
-              ) : (
-                <span className="villager-status">
-                  {firstGradeOf(v.area) > gradeNum(s.grade) ? `${firstGradeOf(v.area)}ねんせいに なったら くるよ` : "たんげんを ならったら くるよ"}
                 </span>
+                <span className="villager-area">{AREA_LABEL[v.area]}</span>
+                <span className="villager-status">
+                  {here
+                    ? left > 0
+                      ? `おねがい あと ${left}`
+                      : "また あした"
+                    : firstGradeOf(v.area) > gradeNum(s.grade)
+                      ? `${firstGradeOf(v.area)}ねんせいに なったら くるよ`
+                      : "たんげんを ならったら くるよ"}
+                </span>
+              </button>
+            );
+          })}
+        </section>
+        <nav className="places" aria-label="ばしょ">
+          {[
+            ["fish", "fishing", "つり", "なにが つれるかな？"],
+            ["craft", "workshop", "つくる", "そざいを あつめよう"],
+            ["camp", "camp", "キャンプ", "きみだけの ばしょ"],
+            ["treasure", "map", "たからのちず", "たからを みつけよう"],
+            ["bag", "bag", "もちもの", "なにが あつまった？"],
+          ].map(([to, art, label, sub]) => (
+            <button
+              key={to}
+              type="button"
+              className={`place place-${to}`}
+              onClick={() => go(to)}
+            >
+              {to === "treasure" && s.treasure.length > 0 && (
+                <span className="badge">{s.treasure.length}</span>
               )}
+              <Art name={art} size="xl" title="" />
+              <span className="place-sign">{label}</span>
+              <span className="place-sub">{sub}</span>
             </button>
-          );
-        })}
-      </section>
-
-      <nav className="places" aria-label="ばしょ">
-        <button type="button" className="place" onClick={() => go("fish")}>
-          <Art name="fishing" size="lg" />
-          <span>つり</span>
-        </button>
-        <button type="button" className="place" onClick={() => go("craft")}>
-          <Art name="workshop" size="lg" />
-          <span>つくる</span>
-        </button>
-        <button type="button" className="place" onClick={() => go("camp")}>
-          <Art name="camp" size="lg" />
-          <span>キャンプ</span>
-        </button>
-        <button type="button" className="place" onClick={() => go("treasure")}>
-          {s.treasure.length > 0 && <span className="badge">{s.treasure.length}</span>}
-          <Art name="map" size="lg" />
-          <span>たからのちず</span>
-        </button>
-        <button type="button" className="place" onClick={() => go("bag")}>
-          <Art name="bag" size="lg" />
-          <span>もちもの</span>
-        </button>
-      </nav>
+          ))}
+        </nav>
+        <span className="forest-entry" aria-hidden="true">
+          すうがくの もり
+        </span>
+      </div>
+      <p className="forest-tip">
+        <Art name="hirameki" size="sm" title="" />
+        もんだいを とくと、もりの くらしが そだつよ。
+      </p>
     </main>
   );
 }

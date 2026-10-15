@@ -13,12 +13,29 @@ export default function Treasure({ s, act, go, r }) {
 
   const start = (entry) => {
     setDone(null);
-    setOpen({ entry, problem: genSimilar(entry.unitId, entry.level, entry.tplId, { r }) });
+    setOpen({
+      entry,
+      problem: genSimilar(entry.unitId, entry.level, entry.tplId, { r }),
+    });
   };
 
   const finish = (res) => {
-    const events = act((st) => applyResult(st, { mode: "treasure", treasureId: open.entry.id, problem: { ...open.problem, area: open.entry.area }, ...res }, r));
-    setDone({ correct: res.correct, got: events.find((e) => e.type === "reward")?.items || {} });
+    const events = act((st) =>
+      applyResult(
+        st,
+        {
+          mode: "treasure",
+          treasureId: open.entry.id,
+          problem: { ...open.problem, area: open.entry.area },
+          ...res,
+        },
+        r,
+      ),
+    );
+    setDone({
+      correct: res.correct,
+      got: events.find((e) => e.type === "reward")?.items || {},
+    });
     setOpen(null);
   };
 
@@ -60,7 +77,11 @@ export default function Treasure({ s, act, go, r }) {
       {done && (
         <div className={`result ${done.correct ? "result-ok" : "result-try"}`}>
           <Art name={done.correct ? "chest" : "map"} size="xl" />
-          <div className="result-title">{done.correct ? "たからばこが ひらいた！" : "おしい！ ちずは のこっているよ"}</div>
+          <div className="result-title">
+            {done.correct
+              ? "たからばこが ひらいた！"
+              : "おしい！ ちずは のこっているよ"}
+          </div>
           <div className="got">
             {Object.entries(done.got).map(([id, k]) => (
               <span key={id} className="got-item">
@@ -71,20 +92,35 @@ export default function Treasure({ s, act, go, r }) {
         </div>
       )}
 
-      <h2 className="h2">
-        <Art name="map" size="sm" /> たからのちず
-      </h2>
-      <p className="lead">まちがえた もんだいは、たからの ありか。にている もんだいを とくと、たからばこが ひらくよ。</p>
+      <div className="page-heading">
+        <Art name="map" size="xl" title="" />
+        <div>
+          <span className="eyebrow">まちがいは、たからの ありか</span>
+          <h1>たからを みつけよう！</h1>
+        </div>
+      </div>
+      <p className="lead">
+        まちがえた もんだいは、たからの ありか。にている もんだいを
+        とくと、たからばこが ひらくよ。
+      </p>
 
       {s.treasure.length === 0 ? (
-        <p className="note">いまは ちずが ないよ。まちがえても だいじょうぶ。ここに ちずが ふえるだけ！</p>
+        <p className="note">
+          いまは ちずが ないよ。まちがえても だいじょうぶ。ここに ちずが
+          ふえるだけ！
+        </p>
       ) : (
         <div className="maps">
           {[...s.treasure].reverse().map((t) => {
             const u = getUnit(t.unitId);
             const v = villagerOfArea(t.area);
             return (
-              <button key={t.id} type="button" className="map-card" onClick={() => start(t)}>
+              <button
+                key={t.id}
+                type="button"
+                className="map-card"
+                onClick={() => start(t)}
+              >
                 <Art name={v?.art || "map"} size="lg" />
                 <span className="map-body">
                   <span className="map-unit">
