@@ -1,0 +1,37 @@
+/* ============================================================
+   tokens.css — 見た目の共通の値（仮）。
+   デザイン（Codex）は、まずここを決めなおす。色・角丸・影・文字の大きさ・タップの大きさ。
+   ============================================================ */
+:root {
+  /* 色 */
+  --bg: #e8f3e0; /* 森の背景 */
+  --bg-2: #cfe6c3;
+  --card: #fffdf6; /* カード（クリーム） */
+  --card-2: #f6efdc;
+  --line: #d9cfb4;
+  --ink: #2f3a2b; /* 文字 */
+  --ink-soft: #5d6b57;
+  --primary: #3f8f4e; /* だいじなボタン（森のみどり） */
+  --primary-ink: #ffffff;
+  --accent: #f2b33d; /* おひさま */
+  --wood: #b07a45;
+  --ok: #2e8b57;
+  --try: #d9822b;
+  --danger: #c0473d;
+  --night: #24304d;
+
+  /* かたち */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 2px 0 rgba(60, 50, 20, 0.12), 0 6px 16px rgba(60, 50, 20, 0.08);
+
+  /* 文字（小1でも読める大きさ） */
+  --font: "Hiragino Maru Gothic ProN", "BIZ UDPGothic", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  --fs-body: 18px;
+  --fs-small: 15px;
+  --fs-q: 22px; /* 問題文 */
+  --fs-title: 34px;
+
+  /* タップの大きさ（こどもの指） */
+  --tap: 52px;
+}

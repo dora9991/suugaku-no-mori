@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 仮のアイコン（木）。デザインで差しかえる -->
+  <rect x="28" y="40" width="8" height="18" rx="2" fill="#8a5a2b"/>
+  <circle cx="32" cy="26" r="20" fill="#3f8f4e"/>
+  <circle cx="24" cy="22" r="4" fill="#f2b33d"/>
+  <circle cx="40" cy="30" r="4" fill="#f2b33d"/>
+</svg>

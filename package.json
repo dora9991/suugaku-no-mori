@@ -1,0 +1,23 @@
+{
+  "name": "kazu-no-mori",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "かずの森（仮）— 算数をとくと森のくらしが育つ、小学生向けのゲーム。問題は数学ラボ ソロの小学校テンプレートを使う。",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test test/*.test.mjs",
+    "sync": "node scripts/sync-content.mjs"
+  },
+  "dependencies": {
+    "katex": "^0.16.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.0"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "from": "math-dialogue/src/solo（数学ラボ ソロ）",
+  "branch": "claude/keen-tesla-em1r7j",
+  "commit": "f500aac",
+  "commitDate": "2026-10-13",
+  "subject": "数学ラボ ソロ: 講義タブに会話授業・解説動画のURL登録（規則で自動／1本ずつ）を追加",
+  "syncedAt": "2026-10-15",
+  "files": [
+    {
+      "from": "content/kit.js",
+      "to": "kit.js"
+    },
+    {
+      "from": "content/elem/e1.js",
+      "to": "elem/e1.js"
+    },
+    {
+      "from": "content/elem/e2.js",
+      "to": "elem/e2.js"
+    },
+    {
+      "from": "content/elem/e3.js",
+      "to": "elem/e3.js"
+    },
+    {
+      "from": "content/elem/e4.js",
+      "to": "elem/e4.js"
+    },
+    {
+      "from": "content/elem/e5.js",
+      "to": "elem/e5.js"
+    },
+    {
+      "from": "content/elem/e6.js",
+      "to": "elem/e6.js"
+    },
+    {
+      "from": "engine/answer.js",
+      "to": "answer.js"
+    }
+  ]
+}
