@@ -5,8 +5,9 @@ import react from "@vitejs/plugin-react";
 // 公開（build）のときの base は GitHub Pages のリポジトリ名と完全一致させる（公開URL github.io/suugaku-no-mori/）。
 // ※ ここがズレると公開時に真っ白になる。リポジトリ名を変えたらここも直すこと。
 // 開発（npm run dev）は http://localhost:5185/ で開く。
-export default defineConfig(({ command }) => ({
-  base: command === "build" ? "/suugaku-no-mori/" : "/",
+// 公開と同じ形の確認（npm run build → npm run preview）は http://localhost:5185/suugaku-no-mori/ で開く。
+export default defineConfig(({ command, isPreview }) => ({
+  base: command === "build" || isPreview ? "/suugaku-no-mori/" : "/",
   plugins: [react()],
   server: { port: 5185 },
   preview: { port: 5185 },
