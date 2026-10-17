@@ -484,7 +484,7 @@ p {
   width: 126px;
   height: 126px;
   transform-origin: 50% 95%;
-  animation: breathe 4s ease-in-out infinite;
+  animation: resident-idle 6.5s ease-in-out infinite;
   filter: drop-shadow(0 5px 2px #44603419);
 }
 .villager-chikuta > .art {
@@ -500,7 +500,8 @@ p {
   animation: greet-hop 0.6s ease-out;
 }
 .villager:active:not(:disabled) > .art {
-  transform: scale(0.94);
+  animation: none;
+  transform: translateY(3px) scale(0.94);
 }
 .villager-sign {
   display: flex;
@@ -3235,5 +3236,44 @@ p {
   }
   50% {
     transform: translateX(2px) translateY(-3px) rotate(1deg);
+  }
+}
+
+/* Short character reactions never block the next game action. */
+.art-character.art-mood-happy {
+  transform-origin: 50% 95%;
+  animation: character-cheer 0.75s ease-out both;
+}
+@keyframes resident-idle {
+  0%,
+  100% {
+    transform: rotate(-1deg) translateY(0);
+  }
+  42% {
+    transform: rotate(1deg) translateY(-4px);
+  }
+  87% {
+    transform: rotate(-1deg) translateY(0);
+  }
+  92% {
+    transform: rotate(2deg) translateY(-8px);
+  }
+  96% {
+    transform: rotate(-1deg) translateY(0);
+  }
+}
+@keyframes character-cheer {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(3px) scale(1.04, 0.95);
+  }
+  55% {
+    transform: translateY(-10px) rotate(-4deg);
+  }
+  78% {
+    transform: translateY(0) scale(1.03, 0.97);
   }
 }

@@ -140,7 +140,7 @@ export default function ProblemCard({
   return (
     <div className={`problem ${msg ? "is-thinking" : ""} phase-${phase}`}>
       <Expression.Provider
-        value={msg || phase === "reveal" ? "worried" : "normal"}
+        value={msg || phase !== "ask" ? "worried" : "normal"}
       >
         <div className="problem-header">{header}</div>
       </Expression.Provider>
@@ -210,7 +210,8 @@ export default function ProblemCard({
                 key={i}
                 type="button"
                 className="choice"
-                aria-label={toSpeech(c)}
+                data-testid={`choice-${i}`}
+                aria-label={toSpeech(String(c))}
                 disabled={wrongChoices.includes(String(c))}
                 onClick={() => submit(c)}
               >

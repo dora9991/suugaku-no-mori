@@ -55,6 +55,7 @@ export function SoundButton() {
       type="button"
       className="btn sound-toggle"
       data-sound-toggle
+      data-testid="sound-toggle"
       aria-pressed={enabled}
       aria-label={
         enabled ? "おと あり（おとを けす）" : "おと なし（おとを つける）"
@@ -126,6 +127,7 @@ export function TopBar({ s, title, onBack, onSettings, onBag }) {
           type="button"
           className="btn btn-icon hud-bag"
           data-bag-target
+          data-testid="bag-toggle"
           onClick={onBag}
           aria-label="もちもの"
         >

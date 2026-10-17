@@ -7,6 +7,8 @@ async function setup({
   stored = null,
   blocked = false,
   unsupported = false,
+  brokenOscillator = false,
+  brokenGain = false,
 } = {}) {
   const counts = { contexts: 0, resumes: 0, suspends: 0, oscillators: [] };
   const tasks = new Map(),
@@ -40,9 +42,11 @@ async function setup({
       this.destination = {};
     }
     createGain() {
+      if (brokenGain) throw Error("Audio device unavailable");
       return { gain: param(), connect() {}, disconnect() {} };
     }
     createOscillator() {
+      if (brokenOscillator) throw Error("Audio device interrupted");
       const o = {
         frequency: param(),
         connect() {},
@@ -125,14 +129,16 @@ async function setup({
 
 test("音はゲームのセーブに触れず、ミュート・画面切替・非表示を守る", async (t) => {
   await t.test(
-    "初回は無音で、効果音を呼んでも AudioContext を作らない",
+    "初回タップ前は無音で、効果音や画面切替でも AudioContext を作らない",
     async () => {
       const h = await setup();
       try {
         h.module.playCue("correct");
         assert.equal(h.counts.contexts, 0);
         assert.equal(h.tasks.size, 0);
-        assert.equal(h.module.soundEnabled(), false);
+        assert.equal(h.module.soundEnabled(), true);
+        h.module.setSoundScene("camp");
+        assert.equal(h.counts.contexts, 0);
       } finally {
         h.cleanup();
       }
@@ -249,4 +255,94 @@ test("音はゲームのセーブに触れず、ミュート・画面切替・�
       h.cleanup();
     }
   });
+  await t.test(
+    "最初のタップで音楽が始まり、初回のON設定を強制保存しない",
+    async () => {
+      const h = await setup();
+      try {
+        const stop = h.module.listenToGestures();
+        assert.equal(h.counts.contexts, 0);
+        h.handlers.get("pointerdown")({
+          type: "pointerdown",
+          target: { closest: () => null },
+        });
+        assert.equal(h.counts.contexts, 1);
+        assert.equal(h.tasks.size, 1);
+        assert.ok(h.counts.oscillators.length > 0);
+        assert.equal(h.values.size, 0);
+        stop();
+      } finally {
+        h.cleanup();
+      }
+    },
+  );
+  await t.test("記憶したOFFは最初のタップでも解除されない", async () => {
+    const h = await setup({ stored: "off" });
+    try {
+      const stop = h.module.listenToGestures();
+      h.handlers.get("pointerdown")({
+        type: "pointerdown",
+        target: { closest: () => null },
+      });
+      assert.equal(h.module.soundEnabled(), false);
+      assert.equal(h.counts.contexts, 0);
+      assert.equal(h.tasks.size, 0);
+      stop();
+    } finally {
+      h.cleanup();
+    }
+  });
+  await t.test("Tabやキーのリピートでは鳴らず、Enterで開始する", async () => {
+    const h = await setup();
+    try {
+      const stop = h.module.listenToGestures();
+      const key = h.handlers.get("keydown");
+      key({ type: "keydown", key: "Tab", target: { closest: () => null } });
+      key({
+        type: "keydown",
+        key: "Enter",
+        repeat: true,
+        target: { closest: () => null },
+      });
+      assert.equal(h.counts.contexts, 0);
+      key({ type: "keydown", key: "Enter", target: { closest: () => null } });
+      assert.equal(h.counts.contexts, 1);
+      assert.equal(h.tasks.size, 1);
+      stop();
+    } finally {
+      h.cleanup();
+    }
+  });
+  await t.test("OFFは鳴りかけの効果音も止める", async () => {
+    const h = await setup();
+    try {
+      h.module.setSoundEnabled(true);
+      h.module.setSoundScene("quiet");
+      const n = h.counts.oscillators.length;
+      h.module.playCue("crafted");
+      const cues = h.counts.oscillators.slice(n);
+      assert.equal(cues.length, 4);
+      h.module.setSoundEnabled(false);
+      assert.ok(cues.every((o) => o.stops >= 2));
+      assert.equal(h.tasks.size, 0);
+    } finally {
+      h.cleanup();
+    }
+  });
+  await t.test(
+    "音の生成が途中で失敗しても回答などの呼び出しを妨げない",
+    async () => {
+      for (const option of [{ brokenOscillator: true }, { brokenGain: true }]) {
+        const h = await setup(option);
+        try {
+          assert.doesNotThrow(() => h.module.setSoundEnabled(true));
+          assert.doesNotThrow(() => h.module.playCue("correct"));
+          assert.doesNotThrow(() => h.module.setSoundScene("camp"));
+          assert.equal(h.tasks.size, 0);
+        } finally {
+          h.cleanup();
+        }
+      }
+    },
+  );
 });

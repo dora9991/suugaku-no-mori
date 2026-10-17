@@ -72,7 +72,7 @@ export default function Art({
     : "sparkle";
   return (
     <span
-      className={`art art-${size} art-${name} ${character ? "art-character" : ""} ${className}`.trim()}
+      className={`art art-${size} art-${name} ${character ? `art-character art-mood-${mood}` : ""} ${className}`.trim()}
       role={label ? "img" : undefined}
       aria-label={label || undefined}
       aria-hidden={label ? undefined : true}

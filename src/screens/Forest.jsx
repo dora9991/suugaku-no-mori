@@ -67,6 +67,7 @@ export default function Forest({ s, go }) {
                 key={v.id}
                 type="button"
                 className={`villager villager-${v.id} ${here ? "" : "is-away"}`}
+                data-testid={`villager-${v.id}`}
                 disabled={!here}
                 onClick={() => go("request", { villagerId: v.id })}
               >
@@ -114,6 +115,7 @@ export default function Forest({ s, go }) {
               key={to}
               type="button"
               className={`place place-${to}`}
+              data-testid={`place-${to}`}
               onClick={() => go(to)}
             >
               {to === "treasure" && s.treasure.length > 0 && (
