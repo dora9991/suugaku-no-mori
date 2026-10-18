@@ -11,7 +11,10 @@ export function AnswerValue({ value }) {
   const i = value.indexOf("/");
   if (i < 0) return <span className="answer-val">{value}</span>;
   return (
-    <span className="answer-val answer-frac" aria-label={`${value.slice(i + 1) || "□"}ぶんの${value.slice(0, i) || "□"}`}>
+    <span
+      className="answer-val answer-frac"
+      aria-label={`${value.slice(i + 1) || "□"}ぶんの${value.slice(0, i) || "□"}`}
+    >
       <span className="frac-num">{value.slice(0, i) || " "}</span>
       <span className="frac-bar" />
       <span className="frac-den">{value.slice(i + 1) || " "}</span>
@@ -19,11 +22,19 @@ export function AnswerValue({ value }) {
   );
 }
 
-export default function Keypad({ value, onChange, onSubmit, dot = false, slash = false, unit }) {
+export default function Keypad({
+  value,
+  onChange,
+  onSubmit,
+  dot = false,
+  slash = false,
+  unit,
+}) {
   const add = (k) => {
     if (value.length >= MAX) return;
     if (k === "." && (value.includes(".") || value.includes("/"))) return;
-    if (k === "/" && (value.includes("/") || value.includes(".") || !value)) return;
+    if (k === "/" && (value.includes("/") || value.includes(".") || !value))
+      return;
     onChange(value + k);
   };
   return (
@@ -34,30 +45,64 @@ export default function Keypad({ value, onChange, onSubmit, dot = false, slash =
       </div>
       <div className="keys">
         {["7", "8", "9", "4", "5", "6", "1", "2", "3"].map((k) => (
-          <button key={k} type="button" className="key" onClick={() => add(k)}>
+          <button
+            key={k}
+            type="button"
+            className="key"
+            data-testid={`key-${k}`}
+            onClick={() => add(k)}
+          >
             {k}
           </button>
         ))}
         {dot ? (
-          <button type="button" className="key key-sub" onClick={() => add(".")} aria-label="てん">
+          <button
+            type="button"
+            className="key key-sub"
+            data-testid="key-decimal"
+            onClick={() => add(".")}
+            aria-label="てん"
+          >
             .
           </button>
         ) : (
           <span className="key key-blank" aria-hidden="true" />
         )}
-        <button type="button" className="key" onClick={() => add("0")}>
+        <button
+          type="button"
+          className="key"
+          data-testid="key-0"
+          onClick={() => add("0")}
+        >
           0
         </button>
-        <button type="button" className="key key-sub" onClick={() => onChange(value.slice(0, -1))} aria-label="1もじ けす">
+        <button
+          type="button"
+          className="key key-sub"
+          data-testid="key-delete"
+          onClick={() => onChange(value.slice(0, -1))}
+          aria-label="1もじ けす"
+        >
           ⌫
         </button>
       </div>
       {slash && (
-        <button type="button" className="key key-frac" onClick={() => add("/")}>
+        <button
+          type="button"
+          className="key key-frac"
+          data-testid="key-fraction"
+          onClick={() => add("/")}
+        >
           ぶんすうに する（うえ ／ した）
         </button>
       )}
-      <button type="button" className="btn btn-primary btn-answer" disabled={!value} onClick={onSubmit}>
+      <button
+        type="button"
+        className="btn btn-primary btn-answer"
+        data-testid="answer-submit"
+        disabled={!value}
+        onClick={onSubmit}
+      >
         こたえる
       </button>
     </div>
